@@ -1,4 +1,4 @@
-package main
+package soundex
 
 import (
 	"bytes"
@@ -36,7 +36,7 @@ var codes = map[string]string{
 	"z": "2",
 }
 
-func Soundex(s string) string {
+func Encode(s string) string {
 	var encoded bytes.Buffer
 	encoded.WriteByte(s[0])
 

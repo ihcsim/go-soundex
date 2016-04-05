@@ -26,10 +26,12 @@ Soundex is the most widely known of all phonetic algorithms (in part because it 
 ## Getting Started
 
 ```sh
-$ go get github.com/ihcsim/go-soundex             # get the code
-$ go test -v github.com/ihcsim/go-soundex         # test the code
-$ go install $GOPATH/github.com/ihcsim/go-soundex # build the code
-$ $GOPATH/bin/go-soundex                          # start the web server
+$ go get github.com/ihcsim/go-soundex                  # get the code
+$ go test -v github.com/ihcsim/go-soundex              # test the code
+
+# start the web server
+$ cd $GOPATH/github.com/ihcsim/go-soundex/cmd/web
+$ go run main.go web.go
 ```
 
 1. Navigate to `http://localhost:7000/testsuite` to view a list of names and their respective soundex value.
