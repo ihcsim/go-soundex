@@ -32,10 +32,18 @@ $ go test -v github.com/ihcsim/go-soundex              # test the code
 # start the web server
 $ cd $GOPATH/github.com/ihcsim/go-soundex/cmd/web
 $ go run main.go web.go
-```
 
 1. Navigate to `http://localhost:7000/testsuite` to view a list of names and their respective soundex value.
 1. Soundex value of specific name can be determined by specifying the name as a query parameter like this `http://localhost:7000?name=john`.
+
+```sh
+# work with the CLI
+$ go build -o soundex github.com/ihcsim/go-soundex/cmd/cli
+$ soundex --help      # show help
+$ soundex --info      # show algorithm info
+$ soundex --sample    # show sample
+$ soundex john lee    # encode john and lee
+```
 
 ## LICENSE
 
