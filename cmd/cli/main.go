@@ -5,6 +5,7 @@ import (
 	"os"
 	"strconv"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/ihcsim/go-soundex"
 	"github.com/jessevdk/go-flags"
 )
@@ -19,8 +20,7 @@ func main() {
 	p := flags.NewParser(&o, flags.Default)
 	args, err := p.Parse()
 	if err != nil {
-		fmt.Println("Failed to parse CLI arguments")
-		os.Exit(1)
+		log.Fatal("Failed to parse CLI arguments")
 	}
 	p.Usage = "[OPTIONS] <name>"
 
