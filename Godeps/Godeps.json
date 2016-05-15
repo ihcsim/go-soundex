@@ -7,9 +7,18 @@
 	],
 	"Deps": [
 		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Comment": "v0.10.0-16-gcd7d1bb",
+			"Rev": "cd7d1bbe41066b6c1f19780f895901052150a575"
+		},
+		{
 			"ImportPath": "github.com/jessevdk/go-flags",
 			"Comment": "v1-334-g6b9493b",
 			"Rev": "6b9493b3cb60367edd942144879646604089e3f7"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "f78f5183ff267d751d0af20bbe59158f3e4cd53e"
 		}
 	]
 }
