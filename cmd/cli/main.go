@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/ihcsim/go-soundex"
@@ -15,29 +16,35 @@ type opts struct {
 
 func main() {
 	o := opts{}
-	args, _ := flags.Parse(&o)
+	p := flags.NewParser(&o, flags.Default)
+	args, err := p.Parse()
+	if err != nil {
+		fmt.Println("Failed to parse CLI arguments")
+		os.Exit(1)
+	}
+	p.Usage = "[OPTIONS] <name>"
 
 	if o.Info {
 		printInfo()
+		os.Exit(0)
 	}
 
 	if o.Sample {
 		printSample()
+		os.Exit(0)
 	}
 
-	if len(args) > 0 {
-		for _, arg := range args {
-			if _, err := strconv.Atoi(arg); err == nil {
-				fmt.Println("Unable to encode a number")
-				continue
-			}
-
-			if arg[0] == '-' {
-				continue
-			}
-
-			fmt.Printf("Soundex code of %s:%s\n", arg, soundex.Encode(arg))
+	for _, arg := range args {
+		if _, err := strconv.Atoi(arg); err == nil {
+			fmt.Println("Unable to encode a number")
+			continue
 		}
+
+		if arg[0] == '-' {
+			continue
+		}
+
+		fmt.Printf("Soundex code of %s:%s\n", arg, soundex.Encode(arg))
 	}
 }
 
