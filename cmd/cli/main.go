@@ -20,18 +20,23 @@ func main() {
 	p := flags.NewParser(&o, flags.Default)
 	args, err := p.Parse()
 	if err != nil {
-		log.Fatal("Failed to parse CLI arguments")
+		if flagErr, ok := err.(*flags.Error); ok && flagErr.Type == flags.ErrHelp {
+			showHelp(p)
+		}
+		log.Fatal(err)
 	}
 	p.Usage = "[OPTIONS] <name>"
 
 	if o.Info {
-		printInfo()
-		os.Exit(0)
+		showInfo()
 	}
 
 	if o.Sample {
-		printSample()
-		os.Exit(0)
+		showSample()
+	}
+
+	if len(args) == 0 {
+		showHelp(p)
 	}
 
 	for _, arg := range args {
@@ -48,7 +53,12 @@ func main() {
 	}
 }
 
-func printInfo() {
+func showHelp(p *flags.Parser) {
+	p.WriteHelp(os.Stdout)
+	os.Exit(0)
+}
+
+func showInfo() {
 	fmt.Println(`
 American Soundex Algorithm
 ==========================
@@ -65,9 +75,11 @@ The Soundex value of a name is determined by:
   * r → 6
 3. If two or more letters with the same number are adjacent in the original name (before step 1), only retain the first letter; also two letters with the same number separated by 'h' or 'w' are coded as a single number, whereas such letters separated by a vowel are coded twice. This rule also applies to the first letter.
 4. If you have too few letters in your word that you can't assign three numbers, append with zeros until there are three numbers. If you have more than 3 letters, just retain the first 3 numbers.`)
+
+	os.Exit(0)
 }
 
-func printSample() {
+func showSample() {
 	fmt.Println(`
 Soundex Code Sample
 ===================
@@ -102,4 +114,6 @@ S532         | Soundex
 T522         | Tymczak
 W350         | Wheaton
 `)
+
+	os.Exit(0)
 }
