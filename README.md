@@ -26,19 +26,22 @@ Soundex is the most widely known of all phonetic algorithms (in part because it 
 ## Getting Started
 
 ```sh
-$ go get github.com/ihcsim/go-soundex                  # get the code
-$ go test -v github.com/ihcsim/go-soundex              # test the code
+$ go get github.com/ihcsim/go-soundex
+$ go test -v github.com/ihcsim/go-soundex/...  # or `make test`
+```
 
-# start the web server
-$ cd $GOPATH/github.com/ihcsim/go-soundex/cmd/web
-$ go run main.go web.go
+Using the web application:
+```sh
+$ go build -o soundex-web github.com/ihcsim/go-soundex/cmd/web # or `make compile`
+$ soundex-web
+```
 
 1. Navigate to `http://localhost:7000/testsuite` to view a list of names and their respective soundex value.
 1. Soundex value of specific name can be determined by specifying the name as a query parameter like this `http://localhost:7000?name=john`.
 
+Using the CLI:
 ```sh
-# work with the CLI
-$ go build -o soundex github.com/ihcsim/go-soundex/cmd/cli
+$ go build -o soundex github.com/ihcsim/go-soundex/cmd/cli # or `make compile`
 $ soundex --help      # show help
 $ soundex --info      # show algorithm info
 $ soundex --sample    # show sample
@@ -46,5 +49,4 @@ $ soundex john lee    # encode john and lee
 ```
 
 ## LICENSE
-
 This project is under Apache v2 License. See the [LICENSE](LICENSE) file for the full license text.
