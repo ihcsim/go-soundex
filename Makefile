@@ -1,4 +1,4 @@
-PHONE:
+.PHONY: test compile package clean
 
 test:
 	go test -v -cover github.com/ihcsim/go-soundex/...
