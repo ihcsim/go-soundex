@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/ihcsim/go-soundex"
+	"github.com/ihcsim/soundex"
 	"github.com/jessevdk/go-flags"
 )
 

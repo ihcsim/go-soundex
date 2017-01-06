@@ -3,11 +3,12 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/ihcsim/go-soundex"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
+
+	"github.com/ihcsim/soundex"
 )
 
 func home(response http.ResponseWriter, request *http.Request) {
