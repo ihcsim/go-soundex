@@ -1,5 +1,7 @@
 # go-soundex
 
+[![Codeship Status for ihcsim/soundex](https://app.codeship.com/projects/bb2c4a10-b666-0134-ad91-7ea8c0f9c13a/status?branch=master)](https://app.codeship.com/projects/194353)
+
 A Soundex algorithm written in Go.
 
 ## Introduction
