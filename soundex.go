@@ -40,6 +40,13 @@ func Encode(s string) string {
 	var encoded bytes.Buffer
 	encoded.WriteByte(s[0])
 
+	// NARA American Soundex rule 3: "This rule also applies to the first
+	// letter." The first letter is seeded above, but its code was never
+	// recorded, so a second letter sharing that code (e.g. the 'f' in
+	// "Pfister") was wrongly emitted as a digit. prevCode tracks the code of
+	// the first letter's same-code run so such letters are dedup'd against it.
+	prevCode := codes[strings.ToLower(string(s[0]))]
+
 	for i := 1; i < len(s); i++ {
 		if encoded.Len() == codeLen {
 			break
@@ -58,7 +65,18 @@ func Encode(s string) string {
 		}
 
 		if c, ok := codes[current]; ok && len(c) > 0 {
+			// NARA rule 3: skip a letter that shares the code of the first
+			// letter's same-code run. Vowels end the run (letters separated by
+			// a vowel are coded twice); the first emitted digit ends it too.
+			if c == prevCode {
+				continue
+			}
 			encoded.WriteByte(c[0])
+			prevCode = ""
+		} else if current != "h" && current != "w" {
+			// a vowel (a, e, i, o, u, y) breaks the first letter's same-code
+			// run; h and w are transparent and do not.
+			prevCode = ""
 		}
 
 		if codes[current] == codes[next] {
